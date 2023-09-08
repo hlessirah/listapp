@@ -7,15 +7,17 @@ body {
     border-radius: 20%;
     margin: 0;
     margin-top: 100px;
+    background-image: url("background.jpg");
 }
 
 .list {
-    border: 5px solid black;
-    border-radius: 20% 10%;
+    border: 5px solid navy;
+    border-radius: 15% 5%;
     max-width: 30%;
     padding: 10px;
     text-align: center;
     margin: auto;
+    background-color: antiquewhite;
 }
 
 .header {
@@ -31,4 +33,20 @@ body {
 #logo {
     height: 100%;
     transform: scaleX(-1);
+}
+
+.listslist {
+    text-align: center;
+    color: azure;
+}
+
+ul {
+    list-style-type: none;
+    text-align: center;
+    padding-left: 0;
+    color:azure;
+}
+
+.form {
+    text-align: center;
 }
