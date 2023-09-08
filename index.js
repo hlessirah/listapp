@@ -11,8 +11,14 @@ app.use(express.static('static'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false}))
 
-app.get("/", (req, res) => {
-  res.render('index')
+app.get("/", async(req, res) => {
+  const lists = await prisma.list.findMany({include:{todos: true}});
+  res.render('index', {lists})
+})
+
+app.get("/lists", async(req, res) => {
+  const lists = await prisma.list.findMany({include:{todos: true}});
+  res.json(lists)
 })
 
 app.post("/lists", async (req, res, next) => {

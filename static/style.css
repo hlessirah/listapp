@@ -10,7 +10,7 @@ body {
     background-image: url("background.jpg");
 }
 
-.list {
+.listcontainer {
     border: 5px solid navy;
     border-radius: 15% 5%;
     max-width: 30%;
