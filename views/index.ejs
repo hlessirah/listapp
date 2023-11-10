@@ -2,35 +2,72 @@
 <html>
     <head>
         <title>List-Stravaganza</title>
+        <link rel="icon" type="image/x-icon" href="favicon.jpg">
         <link rel="stylesheet" href="style.css" />
       </head>
     <body>
         <div class="header">
             <img id="logo" src="logo.png" alt="logo">
             <h1>Let There Be Lists!</h1>
+            
+<!-- experimenting with drop-down menu -->
+            <div class="dropdown">
+                <button class="dropbtn">LISTS</button>
+                <div class="dropdown-content">
+                    <% lists.forEach((list) => { %>
+                        <a href=<%= "/lists/"+list.id %>> "<%= list.name %>"</a>
+                    <% }) %>
+                </div>
+            </div> 
+  
         </div>
         
         <div class="listcontainer">
+            <h1><%= activeList.name %></h1>
             <h2>Things To Do</h2>
             <ul id="todo">
-                <% lists[0].todos.forEach((thing) => { %>
+                <% activeList.todos.forEach((thing) => { %>
                     <% if(!thing.done) { %>
                         <li>
                             <%=thing.todo %>
                             <br/>
-                            <a class="done" href=<%=`/done/${thing.id}`%>> [Done] </a>
+                            <a class="done" href=<%=`/todos/${thing.id}/done`%>> [Done] </a>
+                            <a class="undo" href=<%=`/todos/${thing.id}/undo`%>> [Undo] </a>
+                            <a class="delete" href=<%=`/todos/${thing.id}/delete`%>> [X] </a>
                         </li>
-
                     <% } %>
                 <% }) %>
             </ul>
+
+            <h2>Things Completed</h2>
+            <ul id="alreadydone">
+                <% activeList.todos.forEach((thing) => { %>
+                    <% if(thing.done) { %>
+                        <li>
+                            <%=thing.todo %>
+                            <br/>
+                            <a class="done" href=<%=`/todos/${thing.id}/done`%>> [Done] </a>
+                            <a class="undo" href=<%=`/todos/${thing.id}/undo`%>> [Undo] </a>
+                            <a class="delete" href=<%=`/todos/${thing.id}/delete`%>> [X] </a>
+                        </li>
+                    <% } %>
+                <% }) %>
+            </ul>
+<!-- adding form -->
+            <div class="form">
+                <form name="todoForm" action="/todo" method="POST">
+                    <input id="todo" name="item" placeholder="NEW TODO"/>
+                    <input type="hidden" id="list" name="list" value=<%=activeList.id %>>
+                    <button type="submit">ADD</button>
+                </form>
+            </div> 
         </div>
 
         <div class="listslist">
             <h2>Current Lists:</h2>
                 <ul>
                     <% lists.forEach((list) => { %>
-                        <li><a href="LINK TO ACCESS LIST">"<%= list.name %>"</a></li>
+                        <li><a href=<%= "/lists/"+list.id %>> "<%= list.name %>"</a></li>
                     <% }) %>
                 </ul>
         </div>
